@@ -5,44 +5,30 @@ import java.awt.event.*;
 import javax.swing.plaf.metal.*;
 import javax.swing.text.*;
 class editor extends JFrame implements ActionListener {
-    // Text component
+
     JTextArea t;
-
-    // Frame
     JFrame f;
-
-    // Constructor
     editor()
     {
-        // Create a frame
         f = new JFrame("editor");
 
         try {
-            // Set metal look and feel
-            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-
-            // Set theme to ocean
-            MetalLookAndFeel.setCurrentTheme(new OceanTheme());
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+            //MetalLookAndFeel.setCurrentTheme(new OceanTheme());
         }
         catch (Exception e) {
         }
-
-        // Text component
         t = new JTextArea();
 
-        // Create a menubar
         JMenuBar mb = new JMenuBar();
 
-        // Create amenu for menu
         JMenu m1 = new JMenu("File");
 
-        // Create menu items
         JMenuItem mi1 = new JMenuItem("New");
         JMenuItem mi2 = new JMenuItem("Open");
         JMenuItem mi3 = new JMenuItem("Save");
         JMenuItem mi9 = new JMenuItem("Print");
 
-        // Add action listener
         mi1.addActionListener(this);
         mi2.addActionListener(this);
         mi3.addActionListener(this);
@@ -53,15 +39,13 @@ class editor extends JFrame implements ActionListener {
         m1.add(mi3);
         m1.add(mi9);
 
-        // Create amenu for menu
         JMenu m2 = new JMenu("Edit");
 
-        // Create menu items
         JMenuItem mi4 = new JMenuItem("cut");
         JMenuItem mi5 = new JMenuItem("copy");
         JMenuItem mi6 = new JMenuItem("paste");
 
-        // Add action listener
+
         mi4.addActionListener(this);
         mi5.addActionListener(this);
         mi6.addActionListener(this);
@@ -84,7 +68,6 @@ class editor extends JFrame implements ActionListener {
         f.show();
     }
 
-    // If a button is pressed
     public void actionPerformed(ActionEvent e)
     {
         String s = e.getActionCommand();
@@ -116,8 +99,7 @@ class editor extends JFrame implements ActionListener {
 
                     // Create buffered writer to write
                     BufferedWriter w = new BufferedWriter(wr);
-
-                    // Write
+                    
                     w.write(t.getText());
 
                     w.flush();
@@ -133,7 +115,6 @@ class editor extends JFrame implements ActionListener {
         }
         else if (s.equals("Print")) {
             try {
-                // print the file
                 t.print();
             }
             catch (Exception evt) {
@@ -153,10 +134,9 @@ class editor extends JFrame implements ActionListener {
                 File fi = new File(j.getSelectedFile().getAbsolutePath());
 
                 try {
-                    // String
+
                     String s1 = "", sl = "";
 
-                    // File reader
                     FileReader fr = new FileReader(fi);
 
                     // Buffered reader
@@ -170,7 +150,6 @@ class editor extends JFrame implements ActionListener {
                         sl = sl + "\n" + s1;
                     }
 
-                    // Set the text
                     t.setText(sl);
                 }
                 catch (Exception evt) {
@@ -189,7 +168,6 @@ class editor extends JFrame implements ActionListener {
         }
     }
 
-    // Main class
     public static void main(String args[])
     {
         editor e = new editor();
